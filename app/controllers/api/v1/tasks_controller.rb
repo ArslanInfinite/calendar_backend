@@ -19,16 +19,24 @@ class Api::V1::TasksController < ApplicationController
     end
   end
 
-  # def update
-  #   @task = Task.find(params[:id])
-  #   @task.update(title: params["task"]["title"])
-  #   @task.save
-  #   render json: @task
-  # end
+  def update
+    @task = Task.find(params[:id])
+    @task.update(task_params)
+    if @task.save
+      render json: @task
+    else
+      render json: {error: 'Error updating task'}
+    end
+  end
 
-   def destroy
+  def destroy
     @task = Task.find(params[:id])
     @task.destroy
   end
 
+  private
+
+  def task_params
+    params.require(:task).permit(:title, :description, :start_time, :end_time, :all_day)
+  end
 end
