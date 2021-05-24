@@ -14,8 +14,10 @@ ActiveRecord::Schema.define(version: 2021_05_22_231930) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "title"
-    t.string "content"
-    t.string "time"
+    t.string "description"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.boolean "all_day", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
